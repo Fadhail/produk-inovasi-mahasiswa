@@ -331,7 +331,7 @@ export default function ModernStudentGallery() {
           <div className="absolute bottom-0 left-1/2 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-500"></div>
         </div>
 
-        <div className="relative container mx-auto px-6 py-8 md:py-12 text-center">
+        <div className="relative container mx-auto px-6 py-10 md:py-14 text-center">
             {/* IRC Gateway Logo */}
             <div className="flex justify-center mb-12">
             <Image
@@ -345,18 +345,10 @@ export default function ModernStudentGallery() {
             </div>
 
           {/* Title */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
-                style={{
-              // WebkitTextStroke only accepts pixel values, not fractions like "1/2px"
-              WebkitTextStroke: "1px black"
-              }}>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
             Galeri Produk Inovasi 
             <span
-              className="block bg-gradient-to-br from-indigo-1000 via-blue-900 to-purple-1000 bg-clip-text text-transparent"
-              style={{
-              // WebkitTextStroke only accepts pixel values, not fractions like "1/2px"
-              WebkitTextStroke: "1px white"
-              }}
+              className="block bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent"
             >
               Informatika Sekolah Vokasi ULBI
             </span>
