@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Galeri Produk Mahasiswa - IRC Gateway',
+  title: 'Galeri Produk Informatika',
   description: 'Karya-karya kreatif dari mahasiswa Informatika - IRC Gateway.',
   icons: {
     icon: '/images/gateway.png',

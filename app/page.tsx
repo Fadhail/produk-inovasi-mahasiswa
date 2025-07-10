@@ -285,6 +285,14 @@ const studentProjects = [
 export default function ModernStudentGallery() {
   const [selectedProject, setSelectedProject] = useState<(typeof studentProjects)[0] | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  // Tambahkan state untuk pagination
+  const [currentPage, setCurrentPage] = useState(1)
+  const cardsPerPage = 9
+  const totalPages = Math.ceil(studentProjects.length / cardsPerPage)
+  const paginatedProjects = studentProjects.slice(
+    (currentPage - 1) * cardsPerPage,
+    currentPage * cardsPerPage
+  )
 
   const openModal = (project: (typeof studentProjects)[0]) => {
     setSelectedProject(project)
@@ -315,7 +323,7 @@ export default function ModernStudentGallery() {
   return (
     <div className="min-h-screen bg-gray-50 font-['Inter',sans-serif]">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-purple-800 text-white overflow-hidden">
+      <section className="relative bg-gradient-to-br from-indigo-700 via-blue-600 to-purple-700 text-white overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-72 h-72 bg-white rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
@@ -323,30 +331,40 @@ export default function ModernStudentGallery() {
           <div className="absolute bottom-0 left-1/2 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-500"></div>
         </div>
 
-        <div className="relative container mx-auto px-6 py-24 md:py-32 text-center">
-          {/* IRC Gateway Logo */}
-          <div className="flex justify-center mb-8">
+        <div className="relative container mx-auto px-6 py-8 md:py-12 text-center">
+            {/* IRC Gateway Logo */}
+            <div className="flex justify-center mb-12">
             <Image
               src="/images/gateway.png"
               alt="IRC Gateway"
-              width={300}
-              height={120}
-              className="h-20 md:h-24 w-auto object-contain drop-shadow-lg"
+              width={900}
+              height={360}
+              className="h-32 md:h-40 w-auto object-contain drop-shadow-lg"
               priority
             />
-          </div>
+            </div>
 
           {/* Title */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            Galeri Produk
-            <span className="block bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">
-              Inovasi Informatika
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+                style={{
+              // WebkitTextStroke only accepts pixel values, not fractions like "1/2px"
+              WebkitTextStroke: "1px black"
+              }}>
+            Galeri Produk Inovasi 
+            <span
+              className="block bg-gradient-to-br from-indigo-1000 via-blue-900 to-purple-1000 bg-clip-text text-transparent"
+              style={{
+              // WebkitTextStroke only accepts pixel values, not fractions like "1/2px"
+              WebkitTextStroke: "1px white"
+              }}
+            >
+              Informatika Sekolah Vokasi ULBI
             </span>
-          </h1>
+            </h1>
 
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed font-light">
-            Karya-karya rintisan kreatif dari mahasiswa Teknik Informatika.
+          <p className="text-xl mb-16 md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed font-light">
+            Karya-karya rintisan kreatif Mahasiswa Teknik Informatika.
           </p>
         </div>
       </section>
@@ -354,7 +372,7 @@ export default function ModernStudentGallery() {
       {/* Gallery Section */}
       <section className="container mx-auto px-6 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {studentProjects.map((project) => (
+          {paginatedProjects.map((project) => (
             <Card
               key={project.id}
               className="group bg-white border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] rounded-2xl overflow-hidden cursor-pointer"
@@ -477,6 +495,32 @@ export default function ModernStudentGallery() {
               </CardFooter>
             </Card>
           ))}
+        </div>
+        {/* Pagination Controls */}
+        <div className="flex justify-center mt-12 gap-2">
+          <button
+            className="px-4 py-2 rounded-lg border bg-white text-gray-700 font-semibold disabled:opacity-50"
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i}
+              className={`px-4 py-2 rounded-lg border font-semibold mx-1 ${currentPage === i + 1 ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'}`}
+              onClick={() => setCurrentPage(i + 1)}
+            >
+              {i + 1}
+            </button>
+          ))}
+          <button
+            className="px-4 py-2 rounded-lg border bg-white text-gray-700 font-semibold disabled:opacity-50"
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
         </div>
 
         {/* Stats Section */}
