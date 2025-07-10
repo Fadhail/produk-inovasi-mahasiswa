@@ -228,7 +228,7 @@ const studentProjects = [
     description: "Proyek sedang dalam tahap pengembangan",
     websiteUrl: "#",
     githubUrl: "#",
-    thumbnail: "/images/Sarah.png",
+    thumbnail: "/images/Sarah.jpg",
     hasWebsite: false,
     hasCustomImage: false,
   },
@@ -346,7 +346,7 @@ export default function ModernStudentGallery() {
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed font-light">
-            Menampilkan karya-karya kreatif dari mahasiswa Teknik Informatika.
+            Karya-karya rintisan kreatif dari mahasiswa Teknik Informatika.
           </p>
         </div>
       </section>
